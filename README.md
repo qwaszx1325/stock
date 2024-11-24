@@ -83,12 +83,3 @@
   GET /api/v1/stocks/update/2330
   ```
 
----
-
-## 貢獻 🤝
-歡迎提出 **Issues** 或提交 **Pull Requests**，一起改進這個項目！
-
----
-
-## 授權 📜
-本項目採用 [MIT License](LICENSE) 授權。
