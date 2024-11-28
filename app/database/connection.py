@@ -1,5 +1,5 @@
 # database/connection.py
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, MetaData
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 from contextlib import contextmanager
@@ -9,6 +9,7 @@ class DatabaseConnection:
     _instance = None
     _engine = None
     _SessionLocal = None
+    _metadata = None
 
     @classmethod
     def get_instance(cls):
@@ -35,7 +36,18 @@ class DatabaseConnection:
                 autoflush=False,
                 bind=self._engine
             )
-
+            
+            self._metadata = MetaData()
+            
+    @property
+    def metadata(self):
+        return self._metadata
+    
+    @property
+    def engine(self):
+        return self._engine
+    
+    
     def table_exists(self, table_name: str) -> bool:
         """檢查表是否存在"""
         query = text(f"""
